@@ -8,6 +8,7 @@ import RightSideBar from './components/RightSideBar';
 import Feed from "./components/Feed";
 import { Web3ContextProvider } from './context/web3context';
 
+
 function App() {
   return (
     <ChakraProvider theme={theme}>

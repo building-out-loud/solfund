@@ -1,10 +1,33 @@
-import { VStack, Grid, Box, Text, Input, HStack, Avatar, Textarea, Button } from "@chakra-ui/react";
-import { useContext } from "react";
+import { VStack, Grid, Box, Text, Input, HStack, Avatar, Textarea, Button, interactivity } from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
 import Fundraise from "./Fundraise";
 import { Web3Context } from "./../context/web3context";
+import { createCampaign, getFundraiseTitle } from "./../utils";
+import { Connection } from "@solana/web3.js";
+
+const connection = new Connection("https://api.devnet.solana.com");
 
 function FundraiseList() {
-    const { currentAccount } = useContext(Web3Context);
+    const { currentAccount, provider } = useContext(Web3Context);
+    const [ fundraiseTitle, setFundraiseTitle ] = useState();
+    const [ fundraiseGoal, setFundraiseGoal ] = useState();
+
+    useEffect(() => {
+        init();
+    }, [])
+
+    const init = async () => {
+        getFundraiseTitle();
+    }
+    const handleFundraiseTitle = ({ target }) => {
+        setFundraiseTitle(target.value);
+    }
+
+
+
+    const handleFundraiseGoal = ({ target }) => {
+        setFundraiseGoal(target.value);
+    }
 
     const fundraises = [
         { 
@@ -44,15 +67,15 @@ function FundraiseList() {
                     <HStack alignItems="flex-start" width="100%">
                         <Avatar z-index="1" borderRadius="7px" size="sm" />
                         <VStack width="100%">
-                            <Input placeholder="Fundraise Title" />
+                            <Input value={fundraiseTitle} onChange={handleFundraiseTitle} placeholder="Fundraise Title" />
                             <HStack width="100%">
-                                <Input placeholder="Fundraise Goal" />
-                                <Input type="date" placeholder="Deadline" />
+                                <Input value={fundraiseGoal} onChange={handleFundraiseGoal} placeholder="Fundraise Goal" />
+                                {/* <Input type="date" placeholder="Deadline" /> */}
                             </HStack>
-                            <Textarea rows="5" width="100%" placeholder="Fundraise Description" />
+                            {/* <Textarea rows="5" width="100%" placeholder="Fundraise Description" /> */}
                         </VStack>
                     </HStack>
-                    <Button>Fundraise</Button>
+                    <Button onClick={() => createCampaign(fundraiseTitle, fundraiseGoal, connection, provider)}>Fundraise</Button>
                 </VStack>
                 :
                 null
