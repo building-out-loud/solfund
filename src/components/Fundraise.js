@@ -1,5 +1,6 @@
-import { HStack, Avatar, VStack, Text, Box, Tag } from "@chakra-ui/react";
+import { HStack, Avatar, VStack, Text, Box, Tag, Tooltip } from "@chakra-ui/react";
 import FundraiseCard from "./FundraiseCard";
+import { GoVerified } from "react-icons/go";
 
 function Fundraise({ fundraise }) {
     return (
@@ -11,8 +12,13 @@ function Fundraise({ fundraise }) {
                 <VStack ml="20px !important" alignItems="flex-start">
                     <HStack>
                         <Text fontWeight="600">
-                            {fundraise.userName}
+                            {fundraise.userName} 
                         </Text>
+                        <Tooltip label="Cred Verified" hasArrow placement="top">
+                            <span>
+                                <GoVerified fill="#000000" />                        
+                            </span>
+                        </Tooltip>
                         <Tag ml="10px !important" background="#0055f7" color="white" fontFamily="Roboto Mono">
                             {`${fundraise.userAddress.substr(0,5)}...${fundraise.userAddress.substr(-5)}`}
                         </Tag>
@@ -28,7 +34,7 @@ function Fundraise({ fundraise }) {
             <Box alignSelf="flex-start" px="20px">
                 <Box marginY="20px">
                     <Text variant="bold">{fundraise.supporters} Supporters</Text>
-                    <HStack><Text>Highest: </Text><Text>₹ {fundraise.highest}</Text></HStack>
+                    <HStack><Text>Highest: </Text><Text>{fundraise.highest} SOL</Text></HStack>
                     <HStack><Text>From: </Text><Text>{fundraise.highestUser}</Text></HStack>
                 </Box>  
             </Box>

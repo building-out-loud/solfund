@@ -1,4 +1,4 @@
-import { Avatar, HStack, VStack, Text } from "@chakra-ui/react";
+import { Avatar, HStack, VStack, Text, Tag } from "@chakra-ui/react";
 
 function ThreadMessage() {
     return (
@@ -7,7 +7,10 @@ function ThreadMessage() {
 
             </Avatar>
             <VStack alignItems="flex-start">
-                <Text variant="bold">Shrey</Text>
+                <HStack>
+                    <Text variant="bold">Shrey</Text>
+                    <Tag fontFamily="Roboto Mono" background="#0055f7" color="white">EKy...qB1</Tag>
+                </HStack>
                 <Text>
                 If in doubt, 42 is always the answer 💙
 
