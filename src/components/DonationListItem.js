@@ -1,4 +1,4 @@
-import { Avatar, HStack, Text } from "@chakra-ui/react";
+import { Avatar, HStack, Text, Tag } from "@chakra-ui/react";
 
 function DonationListItem() {
     return (
@@ -6,8 +6,11 @@ function DonationListItem() {
             <Avatar name="Elio Lopes">
             </Avatar>
             <HStack width="100%" justifyContent="space-between">
-                <Text variant="bold">Elio Lopes</Text>
-                <Text>₹ 45,000</Text>
+                <HStack>
+                    <Text variant="bold">Elio Lopes</Text>
+                    <Tag fontFamily="Roboto Mono" background="#0055f7" color="white">6wk...cgQ</Tag>
+                </HStack>
+                <Text>12 SOL</Text>
             </HStack>
         </HStack>
     );
